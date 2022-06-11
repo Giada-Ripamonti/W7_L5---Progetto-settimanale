@@ -1,20 +1,30 @@
-fetch('../json/users.json').then(response => {
+let usersList = '../json/users.json';
+
+fetch(usersList).then(response => {
    return response.json();
 })
-
 .then(usersData => usersCards(usersData));
 
 function usersCards(users) {
     let container = document.querySelector('#usersCard');
     users.forEach(e => {
         let card = document.createElement('div');
-        card.innerHTML =    `
-                            <h2>${e.firstName} ${e.lastName}</h2>
-                            <img src="${e.profileURL}" alt="">
-                            <p>Gender: <span>${e.gender}</span></p>
-                            <p>Username: <span>${e.username}</span></p>
-                            <p>Email: <span>${e.email}</span></p>
-                            `
         container.appendChild(card);
+
+        let user = document.createElement('h2');
+        user.innerHTML = `${e.firstName} ${e.lastName}`;
+        let profile = document.createElement('img');
+        profile.src =  `${e.profileURL}`;
+        let gender = document.createElement('p');
+        gender.innerHTML = `Gender: <span>${e.gender}</span>`;
+        let userName = document.createElement('p');
+        userName.innerHTML = `Username: <span>${e.username}</span>`;
+        let email = document.createElement('p');
+        email.innerHTML = `Email: <span>${e.email}</span>`;
+        card.appendChild(user);
+        card.appendChild(profile);
+        card.appendChild(gender);
+        card.appendChild(userName);
+        card.appendChild(email);
     });
 };
